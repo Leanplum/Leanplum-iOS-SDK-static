@@ -31,6 +31,24 @@
 - (NSString *)subtitle;
 
 /**
+ * Returns the image path of the inbox message. Can be nil.
+ * Use with [UIImage contentsOfFile:].
+ */
+- (NSString *)imageFilePath;
+
+/**
+ * Returns the image URL of the inbox message.
+ * You can safely use this with prefetching enabled.
+ * It will return the file URL path instead if the image is in cache.
+ */
+- (NSURL *)imageURL;
+
+/**
+ * Returns the data of the inbox message. Advanced use only.
+ */
+- (NSDictionary *)data;
+
+/**
  * Returns the delivery timestamp of the inbox message.
  */
 - (NSDate *)deliveryTimestamp;
@@ -103,6 +121,12 @@ typedef void (^LeanplumInboxChangedBlock)();
  * Returns the inbox messages associated with the given messageId identifier.
  */
 - (LPInboxMessage *)messageForId:(NSString *)messageId;
+
+/**
+ * Call this method if you don't want Inbox images to be prefetched.
+ * Useful if you only want to deal with image URL.
+ */
+- (void)disableImagePrefetching;
 
 /**
  * Block to call when the inbox receive new values from the server.

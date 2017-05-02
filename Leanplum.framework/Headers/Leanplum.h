@@ -1,6 +1,6 @@
 //
 //  Leanplum.h
-//  Leanplum iOS SDK Version 1.7.0
+//  Leanplum iOS SDK Version 2.0.0
 //
 //  Copyright (c) 2016 Leanplum. All rights reserved.
 //
@@ -213,12 +213,12 @@ typedef enum {
  * Needed in development mode to enable the interface editor, as well as in production to allow
  * changes to be applied.
  */
-+ (void)allowInterfaceEditing;
++ (void)allowInterfaceEditing __attribute__((deprecated("Use LeanplumUIEditor pod instead.")));
 
 /**
  * Check if interface editing is enabled.
  */
-+ (BOOL)interfaceEditingEnabled;
++ (BOOL)interfaceEditingEnabled __attribute__((deprecated("Use LeanplumUIEditor pod instead.")));
 
 /**@}*/
 
@@ -879,6 +879,15 @@ typedef enum {
  * Tracks an event in the context of the current message.
  */
 - (void)track:(NSString *)event withValue:(double)value andParameters:(NSDictionary *)params;
+
+/**
+ * Tracks an event in the conext of the current message, with any parent actions prepended to the
+ * message event name.
+ */
+- (void)trackMessageEvent:(NSString *)event
+                withValue:(double)value
+                  andInfo:(NSString *)info
+            andParameters:(NSDictionary *)params;
 
 /**
  * Prevents the currently active message from appearing again in the future.
